@@ -1,0 +1,89 @@
+import csv
+SENTIMENT_CSV = r"/Users/sheva/Downloads/word_sentiment.csv"
+with open(SENTIMENT_CSV, 'rt', encoding='utf-8') as sentiobj:
+    sentiment = csv.reader(sentiobj)
+    for row in sentiment:
+        print(row)
+
+pip install --user nltk
+
+def feature_extractor(word):
+    """F extractor"""
+    f_letter = word[0]
+    l_letter = word[len(word)-1]
+    feature = {"First Letter": f_letter,"Last Letter": l_letter}
+    return feature
+
+i_word=input("please enter a word: ").lower()
+f_word=feature_extractor(i_word)
+print("Features are ", f_word)
+
+def gen_featureset():
+    SENTIMENT_CSV = r"/Users/sheva/Downloads/word_sentiment.csv"
+    with open(SENTIMENT_CSV,'rt', encoding='utf-8') as csvobj:
+        ws_data = csv.reader(csvobj)
+        featureset = list()
+        for row in ws_data:
+            w_feature = list()
+            feature = feature_extractor(row[0])
+            w_feature.append(feature)
+            w_feature.append(row[1])
+            featureset.append(w_feature)
+        return featureset
+            
+
+def ML_train():
+    label_set = gen_featureset()
+    train_set = label_set[:2000]
+    test_set = label_set[2000:]
+    """ This will train the classifier using the word sentiment feature set"""
+    
+    
+    classifier = nltk.NaiveBayesClassifier.train(train_set) #Train the NaiveBayes model using the training data set
+    return classifier
+
+nb_classifier = ML_train()
+print(nb_classifier)
+
+##### Analysis of Trump's tweet on the Stock Market
+import panda as pd
+
+new_tweet_csv = r"Trump_Tweets_2019.csv"
+index_csv = r"nasdaq"
+memrge_csv = r"merged_trump_nasdaq"
+
+import nltk
+nltk.download('stopwords')
+
+import random
+import csv
+
+def tokenize(sentence):
+    """this function does the task of converting a sentence into a list of words"""
+    t_words = sentence.split()
+    return t_words
+
+def removestopwords():
+    stop_words=set(stepwords.words("english"))
+    filtered_tokens=list()
+    for w in tokens:
+        if w not in stop_words:
+            filtered_tokens.append(w.lower())        
+    return filtered_tokens
+
+
+def mostfreq_words(all_tokenwords):
+    all_words=nltk.FreqDist(all_tokenwords)
+    word_features=list(all_words)[:5000]
+    return word_features
+    
+
+merge_csv = r"merged_tweet_NASDAQ_2019"
+with open (merge_csv, 'rt', encoding='utf-8') as tweetobj:
+    classified_tweet=csv.reader(tweetobj)
+    for tweet in classified_tweet
+    tokens = tokenize(tweet[2])
+    print(tokens)
+    
+    filtered_tokens = removestopwords(tokens)
+    print(filtered_tokens)
