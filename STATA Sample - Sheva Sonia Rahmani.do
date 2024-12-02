@@ -22,7 +22,6 @@ estadd local controls No
 
 *all controls
 *eststo: reg chineseshares_aszero strait_placebo_diff_log_mddnpls altitude ln_dist_coast i.Province_fe#c.(ln_dist_batavia ln_dist_semarang ln_dist_tuban ln_dist_gresik ln_dist_trowulan ln_dist_soerabaia) total_area density total_dry total_sawah Longitude if Province_fe>1, first cluster(Reg_FE)
-*GL: i switched these to use the same controls as our main spec
 eststo: reg chineseshares_aszero strait_placebo_diff_log_mddnpls altitude ln_dist_coast i.Pro_FE ln_dist_batavia ln_dist_semarang ln_dist_tuban ln_dist_gresik ln_dist_trowulan ln_dist_soerabaia ln_dist_batavia2 ln_dist_semarang2 ln_dist_tuban2 ln_dist_gresik2 ln_dist_trowulan2 ln_dist_soerabaia2 ln_total_area ln_total_dry ln_total_sawah Longitude if Pro_FE>1, first cluster(Reg_FE)
 
 estadd ysumm 
